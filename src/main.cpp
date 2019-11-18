@@ -6,12 +6,12 @@
 
 int main()
 {
-    std::string filename = "rectangulos.in";
-    std::ifstream in(filename);
+    std::string in_filename = "rectangulos.in";
+    std::ifstream in(in_filename);
 
     if (!in)
     {
-        std::cerr << "Can't read file \"" << filename << "\"." << std::endl;
+        std::cerr << "Can't read file \"" << in_filename << "\"." << std::endl;
         return 1;
     }
 
@@ -35,11 +35,14 @@ int main()
         // y-positions. This is easier than implementing something in `Board`.
         bd.insert({pos_x - 1, pos_y - 1, rows, cols});
     }
+    in.close();
 
+    std::string out_filename = "rectangulos.out";
+    std::ofstream out(out_filename);
     for (auto const& r : bd.get_rectangles())
     {
-        std::cout << "A" << " " << r.pos_x + 1 << " " << r.pos_y + 1 << " "
-                  << r.rows << " " << r.cols << std::endl;
+        out << "A" << " " << r.pos_x + 1 << " " << r.pos_y + 1 << " "
+            << r.rows << " " << r.cols << std::endl;
     }
 
     return 0;

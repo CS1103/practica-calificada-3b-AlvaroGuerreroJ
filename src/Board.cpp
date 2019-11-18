@@ -41,7 +41,13 @@ Board::Board(size_t rows, size_t cols)
 
 bool Board::insert(Rectangle&& rec)
 {
-    // Check if the rectangle fit between the boundaries
+    /**
+     * Returns a boolean indicating wheter the `Rectangle` was inserted.
+     * This is not really used in the program but I thought that there was no
+     * easy way to check if the `Rectangle` was inserted or not.
+     */
+
+    // Check if the rectangle fits between the board boundaries.
     // Because the positions and the sizes are unsigned, we can check only for
     // pos_x + rows and pos_y + cols.
     if (rec.pos_x + rec.rows >= m_rows ||
@@ -52,7 +58,12 @@ bool Board::insert(Rectangle&& rec)
 
     // We are gonna keep a list of the positions already seen as to avoid
     // repeating checks for the same rectangle.
-    std::set<Rectangle> already_seen;
+    using rec_cref = std::reference_wrapper<Rectangle const>;
+    std::set<rec_cref, std::function<bool(rec_cref, rec_cref)>> already_seen(
+        [](rec_cref l, rec_cref r) {
+            return l.get() < r.get();
+        }
+    );
     // Check if any of the positions inside the would-be rectangle are filled.
     for (size_t i = rec.pos_x; i < rec.pos_x + rec.rows; i++)
     {
