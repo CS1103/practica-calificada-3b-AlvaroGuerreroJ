@@ -4,8 +4,6 @@
 
 #include "Board.hpp"
 
-#include "prettyprint.hpp"
-
 int main()
 {
     std::string filename = "rectangulos.in";
