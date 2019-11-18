@@ -33,7 +33,7 @@ private:
 
     // We keep a list of all the rectangles.
     std::set<Rectangle> m_rectangles;
-    //  We need to keep information about which greater cell occupies each square
+    // We need to keep information about which greater cell occupies each square
     // to facilitate checking if the new rectangle would fit within the existing
     // one.
     // XXX: How could I indent this line?
