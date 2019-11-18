@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <optional>
+#include <ostream>
 #include <set>
 #include <vector>
 
@@ -12,20 +13,18 @@ private:
     /**
      * Each rectangle keeps memory of its size and initial position.
      */
-    class Rectangle
+    struct Rectangle
     {
-private:
-        size_t m_pos_x;
-        size_t m_pos_y;
-        size_t m_rows;
-        size_t m_cols;
+public:
+        size_t pos_x;
+        size_t pos_y;
+        size_t rows;
+        size_t cols;
 
 public:
         Rectangle(size_t pos_x, size_t pos_y, size_t rows, size_t cols);
 
         bool operator<(Rectangle const& other) const;
-
-        friend Board;
     };
 
 private:
@@ -34,7 +33,7 @@ private:
 
     // We keep a list of all the rectangles.
     std::set<Rectangle> m_rectangles;
-    // We need to keep information about which greater cell occupies each square
+    //  We need to keep information about which greater cell occupies each square
     // to facilitate checking if the new rectangle would fit within the existing
     // one.
     // XXX: How could I indent this line?
@@ -46,6 +45,8 @@ public:
     Board(size_t rows, size_t cols);
 
     bool insert(Rectangle&& rec);
+
+    std::set<Rectangle> const& get_rectangles() const;
 };
 
 #endif // __BOARD_HPP_
