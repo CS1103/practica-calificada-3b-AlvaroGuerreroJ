@@ -39,7 +39,7 @@ int main()
     for (auto const& r : bd.get_rectangles())
     {
         std::cout << "A" << " " << r.pos_x + 1 << " " << r.pos_y + 1 << " "
-            << r.rows << " " << r.cols << std::endl;
+                  << r.rows << " " << r.cols << std::endl;
     }
 
     return 0;
